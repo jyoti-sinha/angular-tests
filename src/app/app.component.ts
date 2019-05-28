@@ -6,8 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: [ './app.component.css' ]
 })
 export class AppComponent  {
-  name = 'Angular';
-
   ad_data: Array<any> = [
     {
       title: 'Where does it come from?',
@@ -19,7 +17,4 @@ export class AppComponent  {
     }
   ];
 
-  getSendData(e){
-    console.log(e)
-  }
 }

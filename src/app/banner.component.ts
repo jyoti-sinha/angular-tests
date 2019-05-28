@@ -41,7 +41,7 @@ export class BannerAdComponent implements OnInit {
       componentRef = this.viewContainerRef.createComponent(factoryResolver);
       (componentRef.instance).data = this.adFeeds[i];
       (componentRef.instance).send.subscribe((res) => {
-        console.log(res)
+        console.log(res.title)
       })
     })  
   }
