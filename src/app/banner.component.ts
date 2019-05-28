@@ -23,7 +23,7 @@ export class Feeds{
 
 export class BannerAdComponent implements OnInit {
   @Input() adFeeds:Feeds[];
-
+  
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private viewContainerRef: ViewContainerRef
@@ -41,7 +41,7 @@ export class BannerAdComponent implements OnInit {
       componentRef = this.viewContainerRef.createComponent(factoryResolver);
       (componentRef.instance).data = this.adFeeds[i];
       (componentRef.instance).send.subscribe((res) => {
-        console.log(res.title)
+        //this.getComments = res;
       })
     })  
   }
@@ -57,17 +57,22 @@ export class BannerAdComponent implements OnInit {
   template: `<div (click)="toggleSend()">
                 <h4>{{data.title}}</h4>
                 <p>{{data.desc}}</p>
+                <p *ngIf="showComments">{{getComments}}</p>
             </div>`
 })
 
 export class InnerFeedsComponent {
   @Input() data:any;
   @Output() send:EventEmitter<any> = new EventEmitter();
+  showComments:boolean = false;
+  getComments:any;
 
   constructor() {
   }
 
   toggleSend() {
+    this.getComments = this.data.desc;
+    this.showComments = !this.showComments;
     this.send.emit(this.data);
   }
 }
